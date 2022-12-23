@@ -10,6 +10,9 @@
   </head>
 
   <body>
+  <%# when not signed in we need sign button %>
+    <%# username, new_sub_url, subs_url, logout button %>
     <%= yield %>
+    <%# when not sign in in login page we need link to sign up %>
   </body>
 </html>
