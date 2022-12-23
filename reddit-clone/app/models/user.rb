@@ -33,7 +33,7 @@ class User < ApplicationRecord
 
     def password=(new_pass)
         @password = new_pass
-        self.password_digest = BCrypt::Password.create(password)
+        self.password_digest = BCrypt::Password.create(new_pass)
     end
 
     def ensure_session_token
@@ -49,4 +49,10 @@ class User < ApplicationRecord
         self.save!
         self.session_token
     end
+
+    has_many :subs,
+        foreign_key: :moderator_id,
+        class_name: :Sub,
+        dependent: :destroy,
+        inverse_of: :moderator
 end
