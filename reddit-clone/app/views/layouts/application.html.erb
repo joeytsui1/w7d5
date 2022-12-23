@@ -10,6 +10,22 @@
   </head>
 
   <body>
+    <% if logged_in? %>
+        <ul>
+            <li><%= current_user.username %></li>
+            <a href="<%= new_sub_url %>"><li>Create a Sub!</li></a>
+            <a href="<%= subs_url %>"><li>All Subs</li></a>
+
+            <form action="<%= session_url %>" method="POST">
+                <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                <input type="hidden" name="_method" value="DELETE">
+                <li><input type="button" value="Sign Out"></li>
+            </form>
+
+        </ul>
+        <% else %>
+        <a href="<%= new_session_url %>">Sign In</a>
+    <% end %>
   <%# when not signed in we need sign button %>
     <%# username, new_sub_url, subs_url, logout button %>
     <%= yield %>
